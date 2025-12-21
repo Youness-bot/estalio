@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export const handler = async (event) => {
   try {
-    // ✅ EXTRACTION CORRECTE DE L’ID
+    // ✅ EXTRACTION CORRECTE DE L’ID 
     // URL: /og/property/:id
     const match = event.path.match(/\/og\/property\/([^/]+)/);
     const propertyId = match?.[1];
@@ -20,6 +20,7 @@ export const handler = async (event) => {
       };
     }
 
+    
     // Fetch property data from Supabase (public endpoint)
     const { data: property, error } = await supabase?.from('properties')?.select(`
         id,
