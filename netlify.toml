@@ -1,17 +1,31 @@
 [build]
   command = "npm run build"
-  publish = "build"
+  publish = "dist"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# 🔥 OG PROPERTY — ABSOLUTELY FIRST (NO CONDITIONS)
+# 🔥 OG PROPERTY — MUST BE FIRST
 [[redirects]]
   from = "/og/property/*"
   to = "/.netlify/functions/og-property"
   status = 200
   force = true
+
+# 🔥 OG FOR PUBLIC VIEW — BOTS ONLY
+[[redirects]]
+  from = "/properties/*/public"
+  to = "/.netlify/functions/og-property"
+  status = 200
+  force = true
+  conditions = { UserAgent = [
+    "facebookexternalhit",
+    "WhatsApp",
+    "Twitterbot",
+    "Slackbot",
+    "TelegramBot"
+  ] }
 
 # SPA fallback (React)
 [[redirects]]
