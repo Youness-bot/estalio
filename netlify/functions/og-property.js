@@ -11,9 +11,9 @@ export const handler = async (event) => {
 // ✅ Extract property ID (SAFE & NETLIFY-COMPATIBLE)
 export const handler = async (event) => {
   try {
-    // 🔒 NETLIFY-SAFE extraction (SANS regex, SANS splat)
-    const segments = event.path.split('/');
-    const propertyId = segments[segments.length - 1];
+// ✅ Extraction CORRECTE de l'ID depuis /og/property/:id
+const match = event.path.match(/\/og\/property\/([^/]+)/);
+const propertyId = match?.[1];
 
     if (!propertyId) {
       return {
