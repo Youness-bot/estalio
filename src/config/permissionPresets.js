@@ -1,0 +1,50 @@
+export const PERMISSION_PRESETS = {
+  admin: {
+    "dashboard.view": true,
+    "reservations.view": true,
+    "reservationDetails.view": true,
+    "tasks.view": true,
+    "properties.view": true,
+    "inventory.view": true,
+    "team.view": true,
+    "users.view": true,
+    "expenses.view": true,
+    "pricing.view": true,
+    "revenues.view": true,
+    "automation.view": true,
+    "settings.view": true,
+    "audit.view": true
+  },
+  manager: {
+    "dashboard.view": true,
+    "reservations.view": true,
+    "reservationDetails.view": true,
+    "tasks.view": true,
+    "properties.view": true,
+    "inventory.view": true,
+    "team.view": true,
+    "expenses.view": true,
+    "pricing.view": true,
+    "revenues.view": true,
+    "automation.view": false,
+    "settings.view": false,
+    "users.view": false,
+    "audit.view": false
+  },
+  user: {
+    "dashboard.view": true,
+    "reservations.view": true,
+    "reservationDetails.view": true,
+    "tasks.view": true,
+    "properties.view": false,
+    "inventory.view": false,
+    "team.view": false,
+    "expenses.view": false,
+    "pricing.view": false,
+    "revenues.view": false,
+    "automation.view": false,
+    "settings.view": false,
+    "users.view": false,
+    "audit.view": false
+  }
+};

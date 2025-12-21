@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for Theme System */
+:root {
+  /* Brand Colors */
+  --brand-50: #f0f9ff;
+  --brand-100: #e0f2fe;
+  --brand-200: #bae6fd;
+  --brand-300: #7dd3fc;
+  --brand-400: #38bdf8;
+  --brand-500: #0ea5e9;
+  --brand-600: #0284c7;
+  --brand-700: #0369a1;
+  --brand-800: #075985;
+  --brand-900: #0c4a6e;
+
+  /* Semantic Tokens - Light Mode */
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --card: #ffffff;
+  --muted: #f1f5f9;
+  --accent: var(--brand-500);
+  --accent-foreground: #ffffff;
+  --border-subtle: #e2e8f0;
+  --fg: #0f172a;
+  --fg-muted: #64748b;
+
+  /* Shadcn/UI CSS Variables - Light Mode */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 203 89% 53%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 203 89% 53%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 203 89% 53%;
+  --success: 142.1 76.2% 36.3%;
+  --success-foreground: 355.7 100% 97.3%;
+  --warning: 32.5 94.6% 43.7%;
+  --warning-foreground: 210 40% 98%;
+  --error: 0 84.2% 60.2%;
+  --error-foreground: 210 40% 98%;
+  --radius: 0.5rem;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"], .dark {
+  --surface-dark: #0f172a;
+  --surface-2-dark: #1e293b;
+  --card-dark: #1e293b;
+  --muted-dark: #334155;
+  --accent-dark: var(--brand-400);
+  --accent-foreground-dark: #0f172a;
+  --border-subtle-dark: #334155;
+  --fg-dark: #f8fafc;
+  --fg-muted-dark: #94a3b8;
+
+  /* Override light mode variables */
+  --surface: var(--surface-dark);
+  --surface-2: var(--surface-2-dark);
+  --card: var(--card-dark);
+  --muted: var(--muted-dark);
+  --accent: var(--accent-dark);
+  --accent-foreground: var(--accent-foreground-dark);
+  --border-subtle: var(--border-subtle-dark);
+  --fg: var(--fg-dark);
+  --fg-muted: var(--fg-muted-dark);
+
+  /* Shadcn/UI CSS Variables - Dark Mode */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 203 89% 53%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 203 89% 53%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 203 89% 53%;
+  --success: 142.1 70.6% 45.3%;
+  --success-foreground: 144.9 80.4% 10%;
+  --warning: 35.5 91.7% 32.9%;
+  --warning-foreground: 20.5 90.2% 48.2%;
+  --error: 0 62.8% 30.6%;
+  --error-foreground: 210 40% 98%;
+}
+
+/* Component-specific styles */
+@layer components {
+  .surface-bg {
+    background-color: var(--surface);
+  }
+  
+  .surface-2-bg {
+    background-color: var(--surface-2);
+  }
+  
+  .card-bg {
+    background-color: var(--card);
+  }
+  
+  .muted-bg {
+    background-color: var(--muted);
+  }
+  
+  .accent-bg {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+  
+  .fg-text {
+    color: var(--fg);
+  }
+  
+  .fg-muted-text {
+    color: var(--fg-muted);
+  }
+  
+  .border-subtle {
+    border-color: var(--border-subtle);
+  }
+}
+
+/* Utility classes for brand colors */
+@layer utilities {
+  .bg-brand-hover {
+    background-color: var(--brand-600);
+  }
+  
+  .border-brand {
+    border-color: var(--brand-500);
+  }
+  
+  .text-brand {
+    color: var(--brand-500);
+  }
+
+  .text-brand-600 {
+    color: var(--brand-600);
+  }
+
+  .bg-brand-50 {
+    background-color: var(--brand-50);
+  }
+
+  .bg-brand-100 {
+    background-color: var(--brand-100);
+  }
+
+  .bg-brand-500 {
+    background-color: var(--brand-500);
+  }
+
+  .bg-brand-600 {
+    background-color: var(--brand-600);
+  }
+}
