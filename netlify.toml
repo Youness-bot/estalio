@@ -1,19 +1,19 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "build"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# 🔥 OG PROPERTY — MUST BE FIRST
+# 🔥 OG PROPERTY — FIRST
 [[redirects]]
   from = "/og/property/*"
   to = "/.netlify/functions/og-property"
   status = 200
   force = true
 
-# 🔥 OG FOR PUBLIC VIEW — BOTS ONLY
+# 🔥 OG for PUBLIC VIEW (bots)
 [[redirects]]
   from = "/properties/*/public"
   to = "/.netlify/functions/og-property"
@@ -27,7 +27,7 @@
     "TelegramBot"
   ] }
 
-# SPA fallback (React)
+# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
