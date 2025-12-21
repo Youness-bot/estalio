@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client - CORRECTED: Use Netlify Functions environment variables
+// ✅ Supabase via Netlify env vars
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
@@ -8,28 +8,10 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export const handler = async (event) => {
   try {
-// ✅ Extract property ID (SAFE & NETLIFY-COMPATIBLE)
-export const handler = async (event) => {
-  try {
-// ✅ Extraction CORRECTE de l'ID depuis /og/property/:id
-const match = event.path.match(/\/og\/property\/([^/]+)/);
-const propertyId = match?.[1];
-
-    if (!propertyId) {
-      return {
-        statusCode: 400,
-        body: 'Property ID is required'
-      };
-    }
-
-
-if (!propertyId) {
-  return {
-    statusCode: 400,
-    body: 'Property ID is required'
-  };
-}
-
+    // ✅ EXTRACTION CORRECTE DE L’ID
+    // URL: /og/property/:id
+    const match = event.path.match(/\/og\/property\/([^/]+)/);
+    const propertyId = match?.[1];
 
     if (!propertyId) {
       return {
