@@ -8,10 +8,19 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export const handler = async (event) => {
   try {
-    // Extract property ID from path
-    const pathParts = event.rawPath.replace('/og/property/', '').split('/');
-const propertyId = pathParts[0];
-    const propertyId = pathParts?.[pathParts?.length - 1];
+// ✅ Extract property ID (SAFE & NETLIFY-COMPATIBLE)
+const rawPath = event.rawPath || event.path || '';
+const match = rawPath.match(/^\/og\/property\/([^\/]+)/);
+
+const propertyId = match?.[1];
+
+if (!propertyId) {
+  return {
+    statusCode: 400,
+    body: 'Property ID is required'
+  };
+}
+
 
     if (!propertyId) {
       return {
@@ -98,7 +107,7 @@ const propertyId = pathParts[0];
     const description = `${propertyTypeLabel} · ${property?.bedrooms} chambres · ${property?.max_guests} voyageurs · ${property?.base_price}€/nuit${cityName ? ' · ' + cityName : ''}`;
     
     // Full URL for og:url
-    const baseUrl = process.env.URL || 'https://propertyflow.netlify.app';
+    const baseUrl = 'https://estalio.app';
     const propertyUrl = `${baseUrl}/properties/${property?.id}/public`;
     const ogUrl = `${baseUrl}/og/property/${property?.id}`;
 
@@ -139,11 +148,11 @@ const propertyId = pathParts[0];
     <meta property="og:image:secure_url" content="${primaryImage}">
     
     <!-- Instant redirect to React page -->
-    <meta http-equiv="refresh" content="1; url=${propertyUrl}">
-    <script>
-      // Fallback JavaScript redirect
-      window.location.href = '${propertyUrl}';
-    </script>
+<script>
+  setTimeout(() => {
+    window.location.href = '${propertyUrl}';
+  }, 1500);
+</script>
     
     <style>
       body {
