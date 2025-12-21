@@ -6,26 +6,12 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# 🔥 OG PROPERTY — FIRST
+# 🔥 OG PROPERTY — MUST BE FIRST
 [[redirects]]
   from = "/og/property/*"
   to = "/.netlify/functions/og-property"
   status = 200
   force = true
-
-# 🔥 OG for PUBLIC VIEW (bots)
-[[redirects]]
-  from = "/properties/*/public"
-  to = "/.netlify/functions/og-property"
-  status = 200
-  force = true
-  conditions = { UserAgent = [
-    "facebookexternalhit",
-    "WhatsApp",
-    "Twitterbot",
-    "Slackbot",
-    "TelegramBot"
-  ] }
 
 # SPA fallback
 [[redirects]]
