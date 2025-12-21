@@ -9,10 +9,19 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const handler = async (event) => {
   try {
 // ✅ Extract property ID (SAFE & NETLIFY-COMPATIBLE)
-const rawPath = event.rawPath || event.path || '';
-const match = rawPath.match(/^\/og\/property\/([^\/]+)/);
+export const handler = async (event) => {
+  try {
+    // 🔒 NETLIFY-SAFE extraction (SANS regex, SANS splat)
+    const segments = event.path.split('/');
+    const propertyId = segments[segments.length - 1];
 
-const propertyId = match?.[1];
+    if (!propertyId) {
+      return {
+        statusCode: 400,
+        body: 'Property ID is required'
+      };
+    }
+
 
 if (!propertyId) {
   return {
