@@ -9,7 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const handler = async (event) => {
   try {
     // Extract property ID from path
-    const pathParts = event?.path?.split('/');
+    const pathParts = event.rawPath.replace('/og/property/', '').split('/');
+const propertyId = pathParts[0];
     const propertyId = pathParts?.[pathParts?.length - 1];
 
     if (!propertyId) {
