@@ -1,19 +1,19 @@
 [build]
-  publish = "build"
   command = "npm run build"
+  publish = "build"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Open Graph routes - MUST come before catch-all
+# 🔥 OG PROPERTY — ABSOLUTELY FIRST (NO CONDITIONS)
 [[redirects]]
   from = "/og/property/*"
   to = "/.netlify/functions/og-property"
   status = 200
   force = true
 
-# SPA fallback - catch all other routes
+# SPA fallback (React)
 [[redirects]]
   from = "/*"
   to = "/index.html"
