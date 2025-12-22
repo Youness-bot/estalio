@@ -2,18 +2,12 @@
   command = "npm run build"
   publish = "build"
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
+# On enregistre l'Edge Function sur la route de partage
+[[edge_functions]]
+  path = "/properties/*/public"
+  function = "og-injector"
 
-# 🔥 OG PROPERTY — MUST BE FIRST
-[[redirects]]
-  from = "/og/property/*"
-  to = "/.netlify/functions/og-property"
-  status = 200
-  force = true
-
-# SPA fallback
+# SPA fallback (doit être en dernier)
 [[redirects]]
   from = "/*"
   to = "/index.html"
