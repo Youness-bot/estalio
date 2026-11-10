@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { printEstalioReport } from '../../utils/printEstalioReport';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/AppIcon';
 import { expenseService } from '../../services/expenseService';
@@ -216,9 +217,15 @@ const ExpensesPage = () => {
     alert('PDF export functionality would be implemented here');
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+  const handlePrint = () => printEstalioReport({
+    title: 'Dépenses', subtitle: 'Rapport des dépenses',
+    filters: [['Devise affichée', currentCurrency]],
+    columns: [
+      { label: 'Date', key: 'expenseDate' }, { label: 'Propriété', value: x => x.propertyName || x.property },
+      { label: 'Catégorie', key: 'category' }, { label: 'Dépense', value: x => x.title || x.notes },
+      { label: 'Fournisseur', key: 'vendorName' }, { label: 'Montant', value: x => `${x.amount ?? '—'} ${x.currency || currentCurrency}` }
+    ], rows: expenses, summary: [['Total des dépenses', expenses.length]]
+  });
 
   if (loading) {
     return (
@@ -258,6 +265,7 @@ const ExpensesPage = () => {
           </p>
         </div>
         <div className="flex items-center space-x-3">
+          <Button variant="outline" iconName="Printer" iconPosition="left" onClick={handlePrint}>Imprimer</Button>
           <Button
             variant="outline"
             iconName="Download"
