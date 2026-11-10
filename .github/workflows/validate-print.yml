@@ -16,5 +16,7 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Print integration checks
+        run: node --test tests/print-integration.test.mjs
       - name: Build
         run: npm run build
