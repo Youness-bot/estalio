@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { printEstalioReport } from '../../utils/printEstalioReport';
 import Button from '../../components/ui/Button';
 import PlatformRevenueChart from './components/PlatformRevenueChart';
 import ServicesRevenueBreakdown from './components/ServicesRevenueBreakdown';
@@ -262,6 +263,21 @@ const RevenuesAndReports = () => {
     }
   };
 
+  const handlePrint = () => printEstalioReport({
+    title: 'Revenus & Rapports', subtitle: 'Synthèse financière',
+    filters: [['Période', `${dateRange.start} — ${dateRange.end}`], ['Devise', currentCurrency]],
+    columns: [
+      { label: 'Source', key: 'source' }, { label: 'Détail', key: 'detail' },
+      { label: 'Montant', key: 'amount' }
+    ],
+    rows: [
+      ...platformRevenueData.map(x => ({ source: 'Plateforme', detail: x.platform || x.name || x.channel, amount: x.revenue ?? x.amount })),
+      ...servicesRevenueData.map(x => ({ source: 'Services', detail: x.service || x.name || x.category, amount: x.revenue ?? x.amount })),
+      ...expensesByPropertyData.map(x => ({ source: 'Dépenses', detail: x.propertyName || x.name || x.property, amount: x.expenses ?? x.totalExpenses ?? x.amount }))
+    ],
+    summary: [['Sources affichées', platformRevenueData.length + servicesRevenueData.length + expensesByPropertyData.length]]
+  });
+
   const handleRefresh = useCallback(() => {
     if (!authLoading && isAuthenticated && user?.id) {
       loadRevenueData(true); // Force reload
@@ -345,6 +361,7 @@ const RevenuesAndReports = () => {
           >
             {loading?.data ? 'Refreshing...' : 'Refresh'}
           </Button>
+          <Button variant="outline" iconName="Printer" iconPosition="left" onClick={handlePrint} disabled={loading?.data}>Imprimer</Button>
           <Button
             variant="outline"
             iconName="Download"

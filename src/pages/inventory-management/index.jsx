@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { printEstalioReport } from '../../utils/printEstalioReport';
 import Header from '../../components/ui/Header';
 
 import InventoryStats from './components/InventoryStats';
@@ -184,6 +185,17 @@ const InventoryManagement = () => {
     (item?.description && item?.description?.toLowerCase()?.includes(searchLower)));
   });
 
+  const handlePrint = () => printEstalioReport({
+    title: 'Inventaire', subtitle: 'État des stocks',
+    filters: [['Recherche', searchTerm || 'Tous les articles']],
+    columns: [
+      { label: 'Article', key: 'name' }, { label: 'Propriété', key: 'propertyName' },
+      { label: 'Catégorie', key: 'category' }, { label: 'Type', key: 'type' },
+      { label: 'Quantité', value: x => x.quantity ?? x.currentStock },
+      { label: 'Statut', value: x => x.calculatedStatus || x.status }
+    ], rows: filteredItems, summary: [['Articles affichés', filteredItems.length]]
+  });
+
   if (loading) {
     return (
       <div className="space-y-6">
@@ -216,6 +228,7 @@ const InventoryManagement = () => {
           </p>
         </div>
         <div className="flex items-center space-x-3">
+          <Button variant="outline" iconName="Printer" iconPosition="left" onClick={handlePrint}>Imprimer</Button>
           <Button
             variant="outline"
             iconName="Download"
